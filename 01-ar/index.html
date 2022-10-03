@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR for Candra Kirana Scene 2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+</head>
+<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+<!-- include ar.js for A-Frame -->
+<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+<script src="https://raw.githack.com/fcor/arjs-gestures/master/dist/gestures.js"></script>
+
+<style>
+    .info-text {
+        height: 15%;
+        width: 100%;
+        position: bottom;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(15, 61, 185, 0.8);
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .info-text div {
+        text-align: center;
+        font-size: 1.25em;
+        color: white;
+    }
+
+    .btn {
+        border: none;
+        text-align: center;
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 50%;
+        font-size: 24px;
+    }
+
+    /* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+
+}
+
+@keyframes appear {
+  0%{
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  animation: appear 350ms ease-in 1;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+</style>
+
+<script>
+    AFRAME.registerComponent('markerhandler', 
+    {
+        init: function () 
+        {
+            const element = document.querySelector('.info-text')
+            let myText = document.querySelector("#textContent")
+
+            //let element = document.getElementById("textBox")
+            //let myText = document.getElementById("textContent")
+            
+            const btn = document.createElement("span")
+            const info = document.createElement("i")
+    
+            const btnAtt = document.createAttribute("class")
+            btnAtt.value = "btn"
+
+            //btn.className = "w3-button w3-circle w3-light-grey"
+            info.className = "fa fa-info-circle"
+    
+            //const iAtt = document.createAttribute("class")
+            //iAtt.value = "fa fa-info-circle"
+    
+            //info.setAttributeNode(iAtt)
+            btn.setAttributeNode(btnAtt)
+            btn.appendChild(info)
+
+            var modal = document.getElementById("myModal")
+            var modalContent = document.getElementById("words")
+            var span = document.getElementsByClassName("close")[0]
+
+            this.el.addEventListener('markerFound', () => {
+
+                switch (this.el.id)
+                {
+                    case "kanchil":
+                        element.style.backgroundColor = 'rgba(15, 185, 23, 0.8)' 
+                        /*
+                        if (!element.classList.contains("w3-green"))
+                        {
+                            element.classList.remove("w3-indigo","w3-pink")
+                            element.classList.add("w3-green")
+                        }
+                        */
+                        myText.innerHTML = "You found a kanchil!<br>This one's name is Juwita,<br>which means pretty!"
+                        break
+                    
+                    case "lapis":
+                        element.style.backgroundColor = 'rgba(15, 61, 185, 0.8)'
+                        /*
+                        if (!element.classList.contains("w3-indigo"))
+                        {
+                            element.classList.remove("w3-teal","w3-pink")
+                            element.classList.add("w3-indigo")
+                        }  
+                        */ 
+                        myText.innerHTML = "Not the poison! This is kuih lapis  "
+                        myText.appendChild(btn)
+                        btn.onclick = function() {
+                            modal.style.display = "block"
+                        }
+                        modalContent.innerHTML = "This sweet snack made of steamed glutinous rice is quite popular in Southern China territories and it comes under many names and colours. In Vietnam, a similar snack is called \"banh da lon\" and in Cambodia, \"num chak chan\".<br><br>Even though the exact time period when this snack came to Southeast Asia is not fully known, it is thought to be introduced by Chinese immigrants and popularised as a Nyonya cuisine in Malaysia and Indonesia."
+                        span.onclick = function() {
+                            modal.style.display = "none";
+                        }
+                        modal.onclick = function() {
+                            modal.style.display = "none";
+                        }
+                        break
+                    
+                    case "ketan":
+                        element.style.backgroundColor = 'rgba(177, 34, 15, 0.8)'
+                        /*
+                        if (!element.classList.contains("w3-pink"))
+                        {
+                            element.classList.remove("w3-indigo","w3-green")
+                            element.classList.add("w3-pink")
+                        }
+                        */ 
+                        myText.innerHTML = "You found the poison!<br>This is tapai pulut.  "
+                        myText.appendChild(btn)
+                        btn.onclick = function() {
+                            modal.style.display = "block"
+                        }
+                        modalContent.innerHTML = "According to \"Hikayat Panji Semirang\", where this Panji story was adapted from, tapai was used in the poisoning of the Queen.<br><br>Based on the culinary traditions traced from the descendants of Majapahit community in Indonesia, it is believed that this snack, which is made of fermented rice, has existed since 14th Century or even earlier!<br><br>In Java, the original setting of Panji, tapai pulut is mostly known as \"tape ketan\"."
+                        span.onclick = function() {
+                            modal.style.display = "none";
+                        }
+                        modal.onclick = function() {
+                            modal.style.display = "none";
+                        }
+                        break
+                    
+                    case "dodol":
+                        element.style.backgroundColor = 'rgba(15, 61, 185, 0.8)'
+                        /*
+                        if (!element.classList.contains("w3-indigo"))
+                        {
+                            element.classList.remove("w3-teal","w3-pink")
+                            element.classList.add("w3-indigo")
+                        }
+                        */   
+
+                        myText.innerHTML = "Not the poison! This is dodol  "
+                        myText.appendChild(btn)
+                        btn.onclick = function() {
+                            modal.style.display = "block"
+                        }
+                        modalContent.innerHTML = "Dodol is one of the traditional snacks known to have existed since Majapahit era (14th century or even earlier)!<br><br>Dodol is popular in Indonesia, Malaysia, and Thailand, where it is perhaps more well-known as \"kalamea\".<br><br>A variant of this snack called \"wajik\" has also existed since Majapahit era and is still popular today in Java (the original setting of Panji stories) and Brunei."
+                        span.onclick = function() {
+                            modal.style.display = "none";
+                        }
+                        modal.onclick = function() {
+                            modal.style.display = "none";
+                        }
+                        break
+                    
+                    case "ondeh":
+                        element.style.backgroundColor = 'rgba(15, 61, 185, 0.8)'
+                        /*
+                        if (!element.classList.contains("w3-indigo"))
+                        {
+                            element.classList.remove("w3-green","w3-pink")
+                            element.classList.add("w3-indigo")
+                        }
+                        */
+                        myText.innerHTML = "Not the poison! This is ondeh-ondeh  "
+                        myText.appendChild(btn)
+                        btn.onclick = function() {
+                            modal.style.display = "block"
+                        }
+                        modalContent.innerHTML = "Made of steamed glutinous rice with gula malaka (palm sugar) filling, this snack is also popularised as a Nyonya cuisine in both Malaysia and Indonesia.<br><br>In Java (the original setting of Panji stories), the snack is more commonly known as \"klepon\", while the name \"onde-onde\" is reserved for another type of round-shaped snack of Chinese origin (\"jiandui\"), which is fried, filled with bean paste, and coated with sesame seeds."
+                        span.onclick = function() {
+                            modal.style.display = "none";
+                        }
+                        modal.onclick = function() {
+                            modal.style.display = "none";
+                        }
+                        break
+                    
+                }
+
+            })
+            
+            //el.sceneEl will listen to (all elements in) the scene as compared to any particular element like above
+            this.el.sceneEl.addEventListener('markerLost', () => {
+                myText.innerHTML = "Please scan a marker"
+                /*
+                if (!element.classList.contains("w3-indigo"))
+                {
+                    element.classList.remove("w3-teal","w3-pink")
+                    element.classList.add("w3-indigo")
+                }
+                */
+                element.style.backgroundColor = 'rgba(15, 61, 185, 0.8)'
+            })
+
+        }
+    })
+</script>
+
+
+<body style='margin : 0px; overflow: hidden;'>
+    <div class="info-text" id="textBox">
+        <div><p id="textContent">Please scan a marker</p></div>
+    </div>
+    
+    <!--
+    <div class="w3-container w3-indigo w3-center w3-large" style="opacity:0.8;" id="textBox">
+        <p id="textContent">Please scan a marker</p>
+    </div>
+    -->
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="words">Yummy!</p>
+        </div>
+  
+    </div>
+
+    <a-scene embedded arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false;' 
+        renderer="colorManagement: true; logarithmicDepthBuffer: true" vr-mode-ui="enabled: false" gltf-model="dracoDecoderPath: https://www.gstatic.com/draco/v1/decoders/" gesture-detector>
+
+        <a-marker markerhandler type='pattern' url='textures/pattern-kanchil.patt' id="kanchil"
+            raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;">
+
+            <a-entity gltf-model=”url(models/kanchil.glb)” scale="0.4 0.4 0.4" rotation="-90 0 0" class="clickable" gesture-handler></a-entity>
+        </a-marker>
+
+        <a-marker markerhandler type='pattern' url='textures/pattern-kueh-lapis.patt' id="lapis"
+            raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;">
+
+            <a-entity gltf-model=”url(models/kueh-lapis.glb)” scale="0.5 0.5 0.5" rotation="-90 0 0" class="clickable" gesture-handler></a-entity>
+        </a-marker>
+
+        <a-marker markerhandler type='pattern' url='textures/pattern-tape-ketan.patt' id="ketan"
+            raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;">
+
+            <a-entity gltf-model=”url(models/tape-ketan.glb)” scale="0.4 0.4 0.4" rotation="-90 0 0" class="clickable" gesture-handler></a-entity>
+        </a-marker>
+
+        <a-marker markerhandler type='pattern' url='textures/pattern-dodol.patt' id="dodol"
+            raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;">
+
+            <a-entity gltf-model=”url(models/dodol.glb)” rotation="-90 0 0" class="clickable" gesture-handler></a-entity>
+        </a-marker>
+
+        <a-marker markerhandler type='pattern' url='textures/pattern-ondeh2.patt' id="ondeh"
+            raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;">
+
+            <a-entity gltf-model=”url(models/ondeh.glb)” rotation="-90 0 0" class="clickable" gesture-handler></a-entity>
+        </a-marker>
+
+        
+        <a-entity camera></a-entity>
+    </a-scene>
+
+
+    
+</body>
+</html>
