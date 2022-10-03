@@ -163,8 +163,8 @@
 
             //let element = document.getElementById("textBox")
             //let myText = document.getElementById("textContent")
-            let element = document.querySelector("#textBox")
-            let myText = document.querySelector("#textContent")
+            var element = document.querySelector("#textBox")
+            var myText = document.querySelector("#textContent")
             
             const btn = document.createElement("span")
             const info = document.createElement("i")
@@ -193,23 +193,25 @@
                     case "kanchil":
                         //element.style.backgroundColor = 'rgba(15, 185, 23, 0.8)' 
                         
+                        /*
                         if (!element.classList.contains("w3-green"))
                         {
                             element.classList.remove("w3-indigo","w3-pink")
                             element.classList.add("w3-green")
                         }
-                        
+                        */
                         myText.innerHTML = "You found a kanchil!<br>This one's name is Juwita,<br>which means pretty!"
                         break
                     
                     case "lapis":
                         //element.style.backgroundColor = 'rgba(15, 61, 185, 0.8)'
-                        
+                        /*
                         if (!element.classList.contains("w3-indigo"))
                         {
                             element.classList.remove("w3-teal","w3-pink")
                             element.classList.add("w3-indigo")
-                        }  
+                        }
+                        */
                         
                         myText.innerHTML = "Not the poison! This is kuih lapis  "
                         myText.appendChild(btn)
@@ -227,12 +229,13 @@
                     
                     case "ketan":
                         //element.style.backgroundColor = 'rgba(177, 34, 15, 0.8)'
-                        
+                        /*
                         if (!element.classList.contains("w3-pink"))
                         {
                             element.classList.remove("w3-indigo","w3-green")
                             element.classList.add("w3-pink")
                         }
+                        */
                         
                         myText.innerHTML = "You found the poison!<br>This is tapai pulut.  "
                         myText.appendChild(btn)
@@ -250,13 +253,13 @@
                     
                     case "dodol":
                         //element.style.backgroundColor = 'rgba(15, 61, 185, 0.8)'
-                        
+                        /*
                         if (!element.classList.contains("w3-indigo"))
                         {
                             element.classList.remove("w3-teal","w3-pink")
                             element.classList.add("w3-indigo")
                         }
-                        
+                        */
 
                         myText.innerHTML = "Not the poison! This is dodol  "
                         myText.appendChild(btn)
@@ -274,12 +277,13 @@
                     
                     case "ondeh":
                         //element.style.backgroundColor = 'rgba(15, 61, 185, 0.8)'
-                        
+                        /*
                         if (!element.classList.contains("w3-indigo"))
                         {
                             element.classList.remove("w3-green","w3-pink")
                             element.classList.add("w3-indigo")
                         }
+                        */
                         
                         myText.innerHTML = "Not the poison! This is ondeh-ondeh  "
                         myText.appendChild(btn)
@@ -303,11 +307,13 @@
             this.el.sceneEl.addEventListener('markerLost', () => {
                 myText.innerHTML = "Please scan a marker"
                 
+                /*
                 if (!element.classList.contains("w3-indigo"))
                 {
                     element.classList.remove("w3-teal","w3-pink")
                     element.classList.add("w3-indigo")
                 }
+                */
                 
                 //element.style.backgroundColor = 'rgba(15, 61, 185, 0.8)'
             })
